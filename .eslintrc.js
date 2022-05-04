@@ -24,6 +24,7 @@ module.exports = {
     'react/prop-types': 'off',
     'space-before-function-paren': 'off',
     semi: ['error', 'never'],
+    indent: ['error', 2],
     'comma-dangle': ['error', {
       arrays: 'never',
       objects: 'never',
