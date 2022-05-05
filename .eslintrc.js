@@ -25,6 +25,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     semi: ['error', 'never'],
     indent: ['error', 2],
+    'multiline-ternary': 'off',
     'comma-dangle': ['error', {
       arrays: 'never',
       objects: 'never',

@@ -1,6 +1,9 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { MantineProvider } from '@mantine/core'
+import 'mapbox-gl/dist/mapbox-gl.css'
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
+import 'styles/index.css'
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props
