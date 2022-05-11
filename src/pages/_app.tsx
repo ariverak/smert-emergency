@@ -1,13 +1,15 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { MantineProvider } from '@mantine/core'
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from 'config/apolloClient'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'styles/index.css'
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props
-
+  const apolloClient = useApollo(pageProps)
   return (
     <>
       <Head>
@@ -47,7 +49,9 @@ export default function App(props: AppProps) {
           }
         }}
       >
-        <Component {...pageProps} />
+        <ApolloProvider client={apolloClient}>
+          <Component {...pageProps} />
+        </ApolloProvider>
       </MantineProvider>
     </>
   )
