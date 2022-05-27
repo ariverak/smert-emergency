@@ -9,7 +9,7 @@ import { ALL_EDIFICIOS_QUERY } from 'api/queries'
 import Loading from 'components/Loading'
 
 const Home: NextPage = () => {
-  const { data, loading, error } = useQuery(ALL_EDIFICIOS_QUERY, { ssr: false })
+  const { data, loading, error } = useQuery(ALL_EDIFICIOS_QUERY, { ssr: false, pollInterval: 3000 })
 
   useEffect(() => {
     if (error && typeof window !== 'undefined' && !loading) {

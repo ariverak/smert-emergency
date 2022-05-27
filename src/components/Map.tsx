@@ -33,7 +33,8 @@ export const BaseMap = function BaseMap({
       geocoder.on('result', (e) => {
         console.log(e.result.center)
         mapRef.current?.flyTo({
-          center: e.result.center
+          center: e.result.center,
+          zoom: 14
         })
       })
     }
