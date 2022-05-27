@@ -4,14 +4,14 @@ import { setContext } from '@apollo/client/link/context'
 import { concatPagination } from '@apollo/client/utilities'
 import merge from 'lodash/merge'
 import isEqual from 'lodash/isEqual'
-import { JWT, URI_GRAPHQL } from './constants'
+import { URI_GRAPHQL } from './constants'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<unknown>
 
 const setAuthorizationLink = setContext((request, previousContext) => ({
-  headers: { authorization: `Bearer ${JWT}` }
+  headers: { authorization: `Bearer ${localStorage.getItem('jwt')}` }
 }))
 
 const httpLink = new HttpLink({
