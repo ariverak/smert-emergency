@@ -64,7 +64,9 @@ export const BaseMap = function BaseMap({
   return (
     <Map
       mapboxAccessToken={MAPBOX_TOKEN}
-      onLoad={() => geolocateControlRef.current?.trigger()}
+      onLoad={() => {
+        geolocateControlRef.current?.trigger()
+      }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       ref={mapRef}
       {...props}
@@ -74,6 +76,7 @@ export const BaseMap = function BaseMap({
       <ScaleControl />
       <GeolocateControl
         ref={geolocateControlRef}
+        showUserHeading
         fitBoundsOptions={{ animate: true, zoom: 14 }}
       />
       {children}

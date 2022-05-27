@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import type { NextPage } from 'next'
 import { AppShell } from '@mantine/core'
 import Navbar from 'components/layout/Navbar'
@@ -9,7 +9,15 @@ import { ALL_EDIFICIOS_QUERY } from 'api/queries'
 import Loading from 'components/Loading'
 
 const Home: NextPage = () => {
-  const { data, loading } = useQuery(ALL_EDIFICIOS_QUERY)
+  const { data, loading, error } = useQuery(ALL_EDIFICIOS_QUERY, { ssr: false })
+
+  useEffect(() => {
+    if (error && typeof window !== 'undefined' && !loading) {
+      setTimeout(() => {
+        localStorage.setItem('jwt', '')
+      }, 2000)
+    }
+  }, [error, loading])
 
   const markers = useMemo(() => {
     if (!data) return []

@@ -6,10 +6,29 @@ import { useApollo } from 'config/apolloClient'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'styles/index.css'
+import { useEffect, useState } from 'react'
+import Loading from 'components/Loading'
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props
+  const [ready, setReady] = useState(false)
   const apolloClient = useApollo(pageProps)
+  useEffect(() => {
+    const getToken = () => {
+      const token = window.prompt('Token de acceso')
+      if (token) {
+        localStorage.setItem('jwt', token)
+      } else {
+        getToken()
+      }
+    }
+    if (typeof window !== 'undefined' && !localStorage.getItem('jwt')) {
+      getToken()
+      setReady(true)
+    } else {
+      setReady(true)
+    }
+  }, [])
   return (
     <>
       <Head>
@@ -50,7 +69,7 @@ export default function App(props: AppProps) {
         }}
       >
         <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
+          {ready ? <Component {...pageProps} /> : <Loading />}
         </ApolloProvider>
       </MantineProvider>
     </>
