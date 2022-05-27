@@ -22,10 +22,10 @@ export default function App(props: AppProps) {
         getToken()
       }
     }
-    if (typeof window !== 'undefined' && !localStorage.getItem('jwt')) {
-      getToken()
-      setReady(true)
-    } else {
+    if (typeof window !== 'undefined') {
+      if (!localStorage.getItem('jwt')) {
+        getToken()
+      }
       setReady(true)
     }
   }, [])
